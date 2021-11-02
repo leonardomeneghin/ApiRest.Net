@@ -53,7 +53,7 @@ namespace ApiRest.Net.Controllers
          * Se caso a requisição POST for vazia, lembrar de retornar
          * BADREQUEST
          */
-        [HttpGet("{post}")]               //Caminho especifico do HTTP get
+        [HttpPost]               //Caminho especifico do HTTP get
                                         //Bind ocorre entre `{id} do path e 
         public IActionResult Post([FromBody] Person person) 
         {
@@ -61,7 +61,7 @@ namespace ApiRest.Net.Controllers
             return Ok(_personService.create(person));
         
         }
-        [HttpGet("{put}")]
+        [HttpPut]
         /*Aqui temos um método PUT (update)
          * Realizado através do path put, caso não for inseridos parâmetros para atualizar, lembrar de retornar BADREQUEST
          */
@@ -71,7 +71,7 @@ namespace ApiRest.Net.Controllers
             return Ok(_personService.update(person));
 
         }
-
+        [HttpDelete("{id}")]//Precisa de parâmetro no path para deletarmos uma id conhecida.
         public IActionResult Delete(long id)
         {
             _personService.delete(id);

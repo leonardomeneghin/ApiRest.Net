@@ -9,7 +9,7 @@ namespace ApiRest.Net.services.implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
-        private volatile int count=0;
+        private volatile int count;
 
         public Person create(Person person)
         {
