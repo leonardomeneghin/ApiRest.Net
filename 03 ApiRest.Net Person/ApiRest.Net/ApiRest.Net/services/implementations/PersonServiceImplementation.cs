@@ -1,4 +1,5 @@
 ﻿using ApiRest.Net.Model;
+using ApiRest.Net.Model.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,61 +10,82 @@ namespace ApiRest.Net.services.implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
-        private volatile int count;
+        private SQLServerContext _context;
+
+        public PersonServiceImplementation(SQLServerContext context) 
+        {
+            _context = context;
+        }
+        public Person findByID(long id)
+        {
+            return _context.Persons.SingleOrDefault(p => p.id.Equals(id));
+        }
+        public List<Person> findAll()
+        {
+
+            return _context.Persons.ToList();
+        }
 
         public Person create(Person person)
         {
-            //Aqui ocorre o acesso à base de dados.
+            try
+            {
+                _context.Add(person);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             return person;
         }
 
         public void delete(long id)
         {
-            
-        }
-
-        public List<Person> findAll()
-        {
-            List<Person> persons = new List<Person>();
-            for (int i = 0; i < 8; i++) { //Mocking de persons
-                Person person = MockPerson(i);
-                persons.Add(person);
-            }
-            return persons;
-        }
-
-        private Person MockPerson(int i)
-        {
-            return new Person
+            var result = _context.Persons.SingleOrDefault(p => p.id.Equals(id));
+            if (result != null)
             {
-                id = IncrementAndGet() +i,
-                first_name = "Some name" +i,
-                last_name = "Some LastName" +i,
-                address = "Some ADDRESS"+i,
-                gender = "Gender"+i
-            };
+                try
+                {
+                    _context.Persons.Remove(result);
+                    _context.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
         }
 
-        public Person findByID(long person)
-        {
-            return new Person
-            { 
-                id = IncrementAndGet(),
-                first_name = "Leandro",
-                last_name = "Costa",
-                address = "Uberlandia - Minas Gerais - Brasil",
-                gender = "Male"
-            };
-        }
 
-        private long IncrementAndGet()
-        {
-            return Interlocked.Increment(ref count);
-        }
+      
+
 
         public Person update(Person person)
         {
+            if (!Exists(person.id)) return new Person();
+            var result = _context.Persons.SingleOrDefault(p => p.id.Equals(person.id));
+            if (result != null)
+            {
+                try
+                {
+                    _context.Entry(result).CurrentValues.SetValues(person);
+                    _context.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
             return person;
+        }
+
+        private bool Exists(int id)
+        {
+            return _context.Persons.Any(p => p.id.Equals(id));
         }
     }
 }
