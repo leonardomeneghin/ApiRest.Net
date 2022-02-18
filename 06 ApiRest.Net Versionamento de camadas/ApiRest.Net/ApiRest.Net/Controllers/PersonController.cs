@@ -1,27 +1,24 @@
-﻿using ApiRest.Net.Model;
-using ApiRest.Net.services.implementations;
+﻿using ApiRest.Net.Business.implementations;
+using ApiRest.Net.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiRest.Net.Controllers
 {
+    [ApiVersion("1")]
     [ApiController]
-    [Route("api/[controller]")] //prexi para todos os endPoints dos controllers
+    [Route("api/[controller]/v{version:apiVersion}")] //prexi para todos os endPoints dos controllers
     public class PersonController : ControllerBase
     {
         
 
         private readonly ILogger<PersonController> _logger;
-        private IPersonService _personService;
+        private IPersonBusiness _personBusiness;
 
-        public PersonController(ILogger<PersonController> logger, IPersonService personService)
+        public PersonController(ILogger<PersonController> logger, IPersonBusiness personService)
         {
             _logger = logger;
-            _personService = personService;
+            _personBusiness = personService;
             
         }
         /*Lembre-se que na maturação das apis REST, o próprio contexto do rest consegue separar os path
@@ -33,7 +30,7 @@ namespace ApiRest.Net.Controllers
         public IActionResult Get()
         {
             
-            return Ok(_personService.findAll());
+            return Ok(_personBusiness.findAll());
         
             
         }
@@ -41,9 +38,9 @@ namespace ApiRest.Net.Controllers
             NOTFOUND
         */
         [HttpGet("{id}")]
-        public IActionResult Get(long id)
+        public IActionResult Get(int id)
         {
-            var person = _personService.findByID(id);
+            var person = _personBusiness.findByID(id);
             if (person == null) return NotFound();
             return Ok(person);
         
@@ -58,7 +55,7 @@ namespace ApiRest.Net.Controllers
         public IActionResult Post([FromBody] Person person) 
         {
             if (person == null) return BadRequest();
-            return Ok(_personService.create(person));
+            return Ok(_personBusiness.create(person));
         
         }
         [HttpPut]
@@ -68,13 +65,13 @@ namespace ApiRest.Net.Controllers
         public IActionResult Put([FromBody] Person person) 
         {
             if (person == null) return BadRequest();
-            return Ok(_personService.update(person));
+            return Ok(_personBusiness.update(person));
 
         }
         [HttpDelete("{id}")]//Precisa de parâmetro no path para deletarmos uma id conhecida.
         public IActionResult Delete(long id)
         {
-            _personService.delete(id);
+            _personBusiness.delete(id);
             return NoContent();
 
 
