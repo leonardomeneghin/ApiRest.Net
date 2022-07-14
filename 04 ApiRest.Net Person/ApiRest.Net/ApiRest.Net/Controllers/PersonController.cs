@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 namespace ApiRest.Net.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")] //prexi para todos os endPoints dos controllers
+    [Route("api/[controller]")] //prefix para todos os endPoints dos controllers
     public class PersonController : ControllerBase
     {
         
 
         private readonly ILogger<PersonController> _logger;
-        private IPersonService _personService;
+        private IPersonService _personService; //Vai para a implementação da interface, no caso dentro da service
 
         public PersonController(ILogger<PersonController> logger, IPersonService personService)
         {

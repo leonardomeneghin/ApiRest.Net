@@ -5,14 +5,12 @@ namespace ApiRest.Net.Repository
 {
     public interface IBooksRepository
     {
-
-
         Books createBook(Books book);
         Books updateBook(Books book);
         Books findById(int id);
         void deleteBook(long id);
         List<Books> findAll();
-        bool exists(int id);
+        bool Exists(int id);
     }
 
 }

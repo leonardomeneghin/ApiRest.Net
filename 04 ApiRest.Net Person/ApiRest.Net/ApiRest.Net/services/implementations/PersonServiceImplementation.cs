@@ -16,7 +16,7 @@ namespace ApiRest.Net.services.implementations
         {
             _context = context;
         }
-        public Person findByID(int id)
+        public Person findByID(long id)
         {
             return _context.Persons.SingleOrDefault(p => p.id.Equals(id));
         }
