@@ -2,6 +2,7 @@
 using ApiRest.Net.Model.Context;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using static ApiRest.Net.Repository.IBooksRepository;
 namespace ApiRest.Net.Repository.implementations
 {
@@ -26,7 +27,7 @@ namespace ApiRest.Net.Repository.implementations
                 _context.Add(book); //Adiciona o objeto
                 _context.SaveChanges(); //Persiste os dados
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
