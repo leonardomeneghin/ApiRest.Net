@@ -1,10 +1,14 @@
 ﻿using ApiRest.Net.Business;
+using ApiRest.Net.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Serilog.Core;
-
+/*
+ * Esquema Model Business Controller
+ * Controller => IBusiness => IRepository + Context
+ */
 namespace ApiRest.Net.Controllers
-{
+{   /*Na controller acessa-se a IBUSINESS*/
     /*Informações definidas para expor a API na URL*/
     [ApiVersion("1")]
     [ApiController]
@@ -21,7 +25,6 @@ namespace ApiRest.Net.Controllers
             //Adicionar o logger e o BooksBusiness para acessar os métodos
         }
         /*
-         #TODO
             Implementar versão, rota e métodos da bookscontroller
         Toda api tem:
         1) Versão com ApiVersion
@@ -35,9 +38,34 @@ namespace ApiRest.Net.Controllers
             GET POST PUT DELETE            
          */
         [HttpGet()] //Para o findAll
+        public IActionResult Get() {
+            return Ok(_books.findAll());
+        }
+        [HttpGet("{id}")]
+        public IActionResult Get(int id) 
+        {
+            return Ok(_books.findByID(id)); //Deve-se retornar o Ok status.
+        }
+
         [HttpPost()]
+        public IActionResult Post([FromBody] Books book) {
+            return Ok(_books.create(book));
+        }
+
         [HttpPut()]
+        public IActionResult Put([FromBody] Books book)
+        {
+            if (book == null) return BadRequest();
+            return Ok(_books.update(book));
+        }
+
         [HttpDelete()]
+        public IActionResult Delete(int id) 
+        {
+            _books.delete(id);
+            return NoContent();
+        }
+
 
 
 
