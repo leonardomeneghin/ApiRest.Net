@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 namespace ApiRest.Net.Model
 {
     [Table("Person")]
-    public class Person
+    public class Person : BaseEntity
     {
         [Column("id")]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Column("first_name")]
-        public string first_name { get; set; }
+        public string First_name { get; set; }
 
         [Column("last_name")]
-        public string last_name { get; set; }
+        public string Last_name { get; set; }
 
         [Column("address")]
-        public string address{ get; set; }
+        public string Address{ get; set; }
 
         [Column("gender")]
-        public string gender{ get; set; }
+        public string Gender{ get; set; }
 
     }
 }

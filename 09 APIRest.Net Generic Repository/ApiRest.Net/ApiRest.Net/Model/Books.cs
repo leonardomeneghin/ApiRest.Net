@@ -4,20 +4,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ApiRest.Net.Model
 {
     [Table("tblBooks")]
-    public class Books
+    public class Books : BaseEntity //Verificar herança na BaseEntity
     {
         [Column("id")]
         public int Id { get; set; }
 
         [Column("author")]
-        public string author { get; set; }
+        public string Author { get; set; }
 
         [Column("launch_date")]
-        public DateTime launch_date { get; set; }
+        public DateTime Launch_date { get; set; }
 
         [Column("price")]
-        public float price { get; set; }
+        public float Price { get; set; }
         [Column("title")]
-        public string title { get; set; }
+        public string Title { get; set; }
     }
 }

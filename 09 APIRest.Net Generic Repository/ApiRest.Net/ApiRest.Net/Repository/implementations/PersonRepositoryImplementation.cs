@@ -20,7 +20,7 @@ namespace ApiRest.Net.services.implementations
         }
         public Person findByID(int id)
         {
-            return _context.Persons.SingleOrDefault(p => p.id.Equals(id));
+            return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
         }
         public List<Person> findAll()
         {
@@ -45,7 +45,7 @@ namespace ApiRest.Net.services.implementations
 
         public void delete(long id)
         {
-            var result = _context.Persons.SingleOrDefault(p => p.id.Equals(id));
+            var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
             if (result != null)
             {
                 try
@@ -67,8 +67,8 @@ namespace ApiRest.Net.services.implementations
 
         public Person update(Person person)
         {
-            if (!Exists(person.id)) return null;
-            var result = _context.Persons.SingleOrDefault(p => p.id.Equals(person.id));
+            if (!Exists(person.Id)) return null;
+            var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
             if (result != null)
             {
                 try
@@ -87,7 +87,7 @@ namespace ApiRest.Net.services.implementations
 
         public bool Exists(int id)
         {
-            return _context.Persons.Any(p => p.id.Equals(id));
+            return _context.Persons.Any(p => p.Id.Equals(id));
         }
     }
 }
