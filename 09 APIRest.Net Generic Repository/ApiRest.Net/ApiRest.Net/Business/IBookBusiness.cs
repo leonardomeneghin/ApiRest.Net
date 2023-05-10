@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace ApiRest.Net.Business
 {
-     public interface IBooksBusiness
+     public interface IBookBusiness
      {
       //Devemos lembrar referenciar as classes
-      Books create(Books book);
-      Books update(Books book);
-      Books findByID(int book);
-      List<Books> findAll();
+      Book create(Book book);
+      Book update(Book book);
+      Book findByID(int book);
+      List<Book> findAll();
       void delete(int id);
       bool exists(int id);
      }

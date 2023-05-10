@@ -30,7 +30,7 @@ namespace ApiRest.Net.Controllers
         public IActionResult Get()
         {
             
-            return Ok(_personBusiness.findAll());
+            return Ok(_personBusiness.FindAll());
         
             
         }
@@ -40,7 +40,7 @@ namespace ApiRest.Net.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var person = _personBusiness.findByID(id);
+            var person = _personBusiness.FindById(id);
             if (person == null) return NotFound();
             return Ok(person);
         
@@ -55,7 +55,7 @@ namespace ApiRest.Net.Controllers
         public IActionResult Post([FromBody] Person person) 
         {
             if (person == null) return BadRequest();
-            return Ok(_personBusiness.create(person));
+            return Ok(_personBusiness.Create(person));
         
         }
         [HttpPut]
@@ -65,13 +65,13 @@ namespace ApiRest.Net.Controllers
         public IActionResult Put([FromBody] Person person) 
         {
             if (person == null) return BadRequest();
-            return Ok(_personBusiness.update(person));
+            return Ok(_personBusiness.Update(person));
 
         }
         [HttpDelete("{id}")]//Precisa de parâmetro no path para deletarmos uma id conhecida.
         public IActionResult Delete(long id)
         {
-            _personBusiness.delete(id);
+            _personBusiness.Delete(id);
             return NoContent();
 
 

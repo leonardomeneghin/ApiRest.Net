@@ -15,10 +15,10 @@ namespace ApiRest.Net.Controllers
     [Route("api/[controller]/v{version:apiVersion}/books")]
     public class BooksController : ControllerBase
     {
-        private IBooksBusiness _books;
+        private IBookBusiness _books;
         private readonly ILogger<BooksController> _log; //logs nao podem ser modificados
                                     //readonly ajuda na segurança
-        public BooksController(ILogger<BooksController> logger, IBooksBusiness books) 
+        public BooksController(ILogger<BooksController> logger, IBookBusiness books) 
         {
             _log = logger;
             _books = books;
@@ -48,12 +48,12 @@ namespace ApiRest.Net.Controllers
         }
 
         [HttpPost()]
-        public IActionResult Post([FromBody] Books book) {
+        public IActionResult Post([FromBody] Book book) {
             return Ok(_books.create(book));
         }
 
         [HttpPut()]
-        public IActionResult Put([FromBody] Books book)
+        public IActionResult Put([FromBody] Book book)
         {
             if (book == null) return BadRequest();
             return Ok(_books.update(book));

@@ -3,7 +3,6 @@ using ApiRest.Net.Business.implementations;
 using ApiRest.Net.Model.Context;
 using ApiRest.Net.Repository;
 using ApiRest.Net.Repository.implementations;
-using ApiRest.Net.services.implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -56,9 +55,8 @@ namespace ApiRest.Net
 
             //Injeção de dependências, a (Interface, Implementação do serviço)
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-            services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
-            services.AddScoped<IBooksBusiness, BooksBusinessImplementation>();
-            services.AddScoped<IBooksRepository, BooksRepositoryImplementations>();
+            services.AddScoped<IBookBusiness, BooksBusinessImplementation>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositoryImplementation<>));
         }
 
       

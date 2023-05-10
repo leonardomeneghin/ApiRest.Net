@@ -1,5 +1,6 @@
 ﻿using ApiRest.Net.Model;
 using ApiRest.Net.Model.Context;
+using ApiRest.Net.Repository;
 using ApiRest.Net.Repository.implementations;
 using System;
 using System.Collections.Generic;
@@ -11,46 +12,46 @@ namespace ApiRest.Net.Business.implementations
 {
     public class PersonBusinessImplementation : IPersonBusiness
     {
-        private readonly IPersonRepository _repository;
+        private readonly IGenericRepository<Person> _repository;
 
-        public PersonBusinessImplementation(IPersonRepository repository) 
+        public PersonBusinessImplementation(IGenericRepository<Person> repository) 
         {
             /*Pode-se criar as regras denegócio nesta etapa
              Permitindo ou não certos pontos do código*/
             _repository = repository;
         }
-        public Person findByID(int id)
+        public Person FindById(int id)
         {
-            /*Pode-se criar as regras denegócio nesta etapa
+            /*Pode-se criar as regras de negócio nesta etapa
              Permitindo ou não certos pontos do código*/
-            return _repository.findByID(id);
+            return _repository.FindById(id);
         }
-        public List<Person> findAll()
+        public List<Person> FindAll()
         {
             /*Pode-se criar as regras denegócio nesta etapa
              Permitindo ou não certos pontos do código*/
-            return _repository.findAll();
-        }
-
-        public Person create(Person person)
-        {
-            /*Pode-se criar as regras denegócio nesta etapa
-             Permitindo ou não certos pontos do código*/
-            return _repository.create(person);
+            return _repository.FindAll();
         }
 
-        public void delete(long id)
+        public Person Create(Person person)
         {
-           _repository.delete(id);
+            /*Pode-se criar as regras denegócio nesta etapa
+             Permitindo ou não certos pontos do código*/
+            return _repository.Create(person);
+        }
+
+        public void Delete(long id)
+        {
+           _repository.Delete(id);
         }
 
 
       
 
 
-        public Person update(Person person)
+        public Person Update(Person person)
         {
-            return _repository.update(person);
+            return _repository.Update(person);
          
         }
         /*Exists some pois virou uma classe interna do repository, usado
