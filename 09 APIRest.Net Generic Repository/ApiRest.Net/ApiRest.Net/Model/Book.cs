@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ApiRest.Net.Model
 {
     [Table("tblBooks")]
-    public class Books : BaseEntity //Verificar herança na BaseEntity
+    public class Book : BaseEntity //Herdar o base entity para que o repository receba a implementação da entidade
     {
-        [Column("id")]
-        public int Id { get; set; }
-
         [Column("author")]
         public string Author { get; set; }
 

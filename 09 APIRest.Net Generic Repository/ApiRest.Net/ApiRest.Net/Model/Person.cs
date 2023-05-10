@@ -10,9 +10,6 @@ namespace ApiRest.Net.Model
     [Table("Person")]
     public class Person : BaseEntity
     {
-        [Column("id")]
-        public int Id { get; set; }
-
         [Column("first_name")]
         public string First_name { get; set; }
 

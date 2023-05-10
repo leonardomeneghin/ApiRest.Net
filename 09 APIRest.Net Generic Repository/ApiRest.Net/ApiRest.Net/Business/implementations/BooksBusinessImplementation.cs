@@ -6,23 +6,23 @@ using System.Net;
 
 namespace ApiRest.Net.Business.implementations
 {
-    public class BooksBusinessImplementation : IBooksBusiness
+    public class BooksBusinessImplementation : IBookBusiness
     {
-        private IBooksRepository _repository;
-        public BooksBusinessImplementation(IBooksRepository _repository) 
-        { 
+        private IGenericRepository<Book> _repository;
+        public BooksBusinessImplementation(IGenericRepository<Book> repository) 
+        {
             //Método construtor, chamado sempre que o objeto é instanciado com o operador new
-
+            _repository = repository; //Atributo privado à classe precisa receber o objeto passado pelo construtor.
         }
 
-        public Books create(Books book)
+        public Book create(Book book)
         {
-            return _repository.createBook(book);
+            return _repository.Create(book);
         }
 
         public void delete(int id)
         {
-            _repository.deleteBook(id); //Lembrar de retornar um noContent da classe AspNetCore.Http
+            _repository.Delete(id); //Lembrar de retornar um noContent da classe AspNetCore.Http
         }
 
         public bool exists(int id)
@@ -30,19 +30,19 @@ namespace ApiRest.Net.Business.implementations
             return _repository.Exists(id); 
         }
 
-        public List<Books> findAll()
+        public List<Book> findAll()
         {
-            return _repository.findAll();
+            return _repository.FindAll();
         }
 
-        public Books findByID(int id)
+        public Book findByID(int id)
         {
-            return _repository.findById(id);
+            return _repository.FindById(id);
         }
 
-        public Books update(Books book)
+        public Book update(Book book)
         {
-            return _repository.updateBook(book);
+            return _repository.Update(book);
 ;        }
     }
 }

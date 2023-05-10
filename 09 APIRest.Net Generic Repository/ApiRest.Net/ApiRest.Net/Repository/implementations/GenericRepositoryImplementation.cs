@@ -32,7 +32,7 @@ namespace ApiRest.Net.Repository.implementations
             
         }
 
-        public void delete(long id)
+        public void Delete(long id)
         {
             var result = _dataSet.FirstOrDefault<T>(p => p.Id.Equals(id));
             if (result != null)
@@ -55,12 +55,12 @@ namespace ApiRest.Net.Repository.implementations
             return _dataSet.Any(p => p.Id== id);
         }
 
-        public List<T> findAll()
+        public List<T> FindAll()
         {
             return _dataSet.ToList();
         }
 
-        public T findById(int id)
+        public T FindById(int id)
         {
             return _dataSet.SingleOrDefault(p => p.Id.Equals(id));
         }

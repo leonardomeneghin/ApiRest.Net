@@ -7,9 +7,9 @@ namespace ApiRest.Net.Repository
     {
         T Create(T item);
         T Update(T item);
-        T findById(int id);
-        void delete(long id);
-        List<T> findAll();
+        T FindById(int id);
+        void Delete(long id);
+        List<T> FindAll();
         bool Exists(int id);
     }
 }
