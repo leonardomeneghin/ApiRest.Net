@@ -11,5 +11,6 @@ namespace ApiRest.Net.Repository
         void Delete(long id);
         List<T> FindAll();
         bool Exists(int id);
+        
     }
 }
