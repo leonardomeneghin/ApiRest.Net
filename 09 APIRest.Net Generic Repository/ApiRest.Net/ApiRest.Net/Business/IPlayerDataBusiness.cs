@@ -8,7 +8,7 @@ namespace ApiRest.Net.Business
         public PlayerData Create(PlayerData playerData);
         public PlayerData Update(PlayerData playerData);
         public List<PlayerData> FindAll();
-        public PlayerData FindById(int id);
+        public PlayerData FindAll(int id);
         public void Delete(int id);
 
     }

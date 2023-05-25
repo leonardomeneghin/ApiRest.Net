@@ -12,5 +12,6 @@ namespace ApiRest.Net.Model.Context
         //Lista tudo o que pode ser recuperado ou persistido (get; set;) no banco
         public DbSet<Person> Persons { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<PlayerData> PlayerData { get; set; }
     }
 }

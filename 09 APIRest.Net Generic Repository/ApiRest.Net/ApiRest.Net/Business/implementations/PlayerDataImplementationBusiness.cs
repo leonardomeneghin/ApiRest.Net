@@ -28,7 +28,7 @@ namespace ApiRest.Net.Business.implementations
             return _repository.FindAll();
         }
 
-        public PlayerData FindById(int id)
+        public PlayerData FindAll(int id)
         {
             return _repository.FindById(id);
         }
