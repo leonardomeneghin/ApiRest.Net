@@ -1,4 +1,5 @@
 ﻿using ApiRest.Net.Business.implementations;
+using ApiRest.Net.Data.Converter.VO;
 using ApiRest.Net.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -52,7 +53,7 @@ namespace ApiRest.Net.Controllers
          */
         [HttpPost]               //Caminho especifico do HTTP get
                                         //Bind ocorre entre `{id} do path e 
-        public IActionResult Post([FromBody] Person person) 
+        public IActionResult Post([FromBody] PersonVO person) 
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Create(person));
@@ -62,7 +63,7 @@ namespace ApiRest.Net.Controllers
         /*Aqui temos um método PUT (update)
          * Realizado através do path put, caso não for inseridos parâmetros para atualizar, lembrar de retornar BADREQUEST
          */
-        public IActionResult Put([FromBody] Person person) 
+        public IActionResult Put([FromBody] PersonVO person) 
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Update(person));
