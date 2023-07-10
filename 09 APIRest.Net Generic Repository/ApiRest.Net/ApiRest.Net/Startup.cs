@@ -56,7 +56,9 @@ namespace ApiRest.Net
             //Injeção de dependências, a (Interface, Implementação do serviço)
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IBookBusiness, BooksBusinessImplementation>();
+            services.AddScoped<IPlayerDataBusiness, PlayerDataImplementationBusiness>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositoryImplementation<>));
+            services.AddScoped(typeof(IGenericRepository2<>), typeof(GenericRepositoryImplementation2<>));
         }
 
       

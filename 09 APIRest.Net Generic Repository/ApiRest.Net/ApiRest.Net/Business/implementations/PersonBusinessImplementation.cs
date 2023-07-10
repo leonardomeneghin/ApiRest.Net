@@ -1,4 +1,7 @@
-﻿using ApiRest.Net.Model;
+﻿using ApiRest.Net.Data.Converter.Contract;
+using ApiRest.Net.Data.Converter.Implementations;
+using ApiRest.Net.Data.Converter.VO;
+using ApiRest.Net.Model;
 using ApiRest.Net.Model.Context;
 using ApiRest.Net.Repository;
 using ApiRest.Net.Repository.implementations;
@@ -13,31 +16,39 @@ namespace ApiRest.Net.Business.implementations
     public class PersonBusinessImplementation : IPersonBusiness
     {
         private readonly IGenericRepository<Person> _repository;
+        private readonly PersonConverter _personConverter;
+
 
         public PersonBusinessImplementation(IGenericRepository<Person> repository) 
         {
             /*Pode-se criar as regras denegócio nesta etapa
              Permitindo ou não certos pontos do código*/
             _repository = repository;
+
+           _personConverter = new PersonConverter();
         }
-        public Person FindById(int id)
+        public PersonVO FindById(int id)
         {
             /*Pode-se criar as regras de negócio nesta etapa
              Permitindo ou não certos pontos do código*/
-            return _repository.FindById(id);
+            var entidade = _repository.FindById(id);
+            return _personConverter.Parse(entidade);
         }
-        public List<Person> FindAll()
+        public List<PersonVO> FindAll()
         {
             /*Pode-se criar as regras denegócio nesta etapa
              Permitindo ou não certos pontos do código*/
-            return _repository.FindAll();
+            var entities = _repository.FindAll();
+            return _personConverter.Parse(entities);
         }
 
-        public Person Create(Person person)
+        public PersonVO Create(PersonVO person)
         {
             /*Pode-se criar as regras denegócio nesta etapa
              Permitindo ou não certos pontos do código*/
-            return _repository.Create(person);
+            var personConverted = _personConverter.Parse(person);
+            var entidade = _repository.Create(personConverted);
+            return _personConverter.Parse(entidade);
         }
 
         public void Delete(long id)
@@ -46,12 +57,11 @@ namespace ApiRest.Net.Business.implementations
         }
 
 
-      
-
-
-        public Person Update(Person person)
+        public PersonVO Update(PersonVO person)
         {
-            return _repository.Update(person);
+            var personConverted = _personConverter.Parse(person);
+            var entidade = _repository.Update(personConverted);
+            return _personConverter.Parse(entidade);
          
         }
         /*Exists some pois virou uma classe interna do repository, usado
