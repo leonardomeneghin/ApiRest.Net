@@ -1,4 +1,5 @@
-﻿using ApiRest.Net.Model;
+﻿using ApiRest.Net.Data.Converter.VO;
+using ApiRest.Net.Model;
 using System.Collections.Generic;
 
 
@@ -7,10 +8,10 @@ namespace ApiRest.Net.Business
      public interface IBookBusiness
      {
       //Devemos lembrar referenciar as classes
-      Book create(Book book);
-      Book update(Book book);
-      Book findByID(int book);
-      List<Book> findAll();
+      BookVO create(BookVO book);
+      BookVO update(BookVO book);
+      BookVO findByID(int id);
+      List<BookVO> findAll();
       void delete(int id);
       bool exists(int id);
      }

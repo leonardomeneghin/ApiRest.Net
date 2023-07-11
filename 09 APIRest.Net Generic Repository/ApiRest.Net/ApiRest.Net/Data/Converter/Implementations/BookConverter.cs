@@ -10,6 +10,7 @@ namespace ApiRest.Net.Data.Converter.Implementations
     {
         public Book Parse(BookVO item)
         {
+            if (item == null) return null;
             var book = new Book()
             {
                 Id = item.Id,

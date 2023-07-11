@@ -1,4 +1,5 @@
 ﻿using ApiRest.Net.Business;
+using ApiRest.Net.Data.Converter.VO;
 using ApiRest.Net.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -48,12 +49,12 @@ namespace ApiRest.Net.Controllers
         }
 
         [HttpPost()]
-        public IActionResult Post([FromBody] Book book) {
+        public IActionResult Post([FromBody] BookVO book) {
             return Ok(_books.create(book));
         }
 
         [HttpPut()]
-        public IActionResult Put([FromBody] Book book)
+        public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();
             return Ok(_books.update(book));
