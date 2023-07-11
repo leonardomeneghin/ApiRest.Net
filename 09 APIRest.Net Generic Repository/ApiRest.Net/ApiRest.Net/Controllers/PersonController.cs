@@ -8,7 +8,7 @@ namespace ApiRest.Net.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
-    [Route("api/[controller]/v{version:apiVersion}")] //Versionamento da controller
+    [Route("api/v{version:apiVersion}/[controller]/persons")] //Versionamento da controller
     public class PersonController : ControllerBase
     {
         
