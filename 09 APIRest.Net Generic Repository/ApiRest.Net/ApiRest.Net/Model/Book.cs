@@ -13,7 +13,7 @@ namespace ApiRest.Net.Model
         public DateTime Launch_date { get; set; }
 
         [Column("price")]
-        public float Price { get; set; }
+        public double Price { get; set; }
         [Column("title")]
         public string Title { get; set; }
     }
