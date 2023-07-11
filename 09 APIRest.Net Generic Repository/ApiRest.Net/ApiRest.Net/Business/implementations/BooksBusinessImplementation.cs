@@ -19,10 +19,20 @@ namespace ApiRest.Net.Business.implementations
             _bookConverter = new BookConverter();
         }
 
-        public Book create(BookVO bookVO)
+        public BookVO create(BookVO bookVO)
         {
-            var book = _bookConverter.Parse(bookVO);
-            return _repository.Create(book);
+            try
+            {
+                var bookConverted = _bookConverter.Parse(bookVO);
+                var book = _repository.Create(bookConverted);
+                return _bookConverter.Parse(book);
+                
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
         }
 
         public void delete(int id)
@@ -37,17 +47,23 @@ namespace ApiRest.Net.Business.implementations
 
         public List<BookVO> findAll()
         {
-            return _bookConverter.Parse(_repository.FindAll());
+            var books = _repository.FindAll();
+                 
+            return _bookConverter.Parse(books);
         }
 
-        public Book findByID(int id)
+        public BookVO findByID(int id)
         {
-            return _repository.FindById(id);
+            var book = _bookConverter.Parse(_repository.FindById(id));
+            return book;
         }
 
-        public BookVO update(Book book)
+        public BookVO update(BookVO book)
         {
-            return _bookConverter.Parse(_repository.Update(book));
-;        }
+            var bookConverted = _bookConverter.Parse(book);
+            var bookEntidade =_repository.Update(bookConverted);
+            return _bookConverter.Parse(bookEntidade);
+
+        }
     }
 }
